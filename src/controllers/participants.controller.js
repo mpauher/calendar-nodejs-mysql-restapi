@@ -56,6 +56,22 @@ class ParticipantController {
         }
 
     }
+
+    join = async (req,res) => {
+        try {
+            const { participant_id, event_id } = req.body;
+            console.log(participant_id)
+            const response = await this.participantModel.create(participant_id, event_id);
+            res.send(response);
+        } catch (error) {
+            res.status(500).json({
+              message: error.message
+            });
+        }
+
+    }
+
+    
 }
 
 export default ParticipantController;

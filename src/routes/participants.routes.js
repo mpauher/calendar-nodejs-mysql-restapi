@@ -10,5 +10,7 @@ const router = Router()
 router.get('/participants', participantController.index() )
 router.get('/participants/:id', participantController.show )
 router.post('/participants', participantController.create )
+router.post('/participants/join', participantController.join )
+
 
 export default router
