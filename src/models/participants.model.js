@@ -67,12 +67,11 @@ class ParticipantModel{
         }
     }
 
-    joinEvent = async () =>{
+    joinEvent = async (participant_id,event_id) =>{
         try {
             const [rows] = await database.query(`INSERT INTO events_participants (participant_id, event_id) VALUES (${participant_id},${event_id})`);
 
             return {
-                id: rows.insertId,
                 affected_rows: rows.affectedRows
             };
         } catch (error) {
