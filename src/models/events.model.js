@@ -53,22 +53,51 @@ class EventModel{
 
     filterEvents = async (filters) => {
         try {
+
+            //Filter especific date
+
             let query = `
-                SELECT e.title, e.subject, e.description 
+                SELECT e.title, e.subject, e.description , e.start_date
                 FROM events e 
-                INNER JOIN events_participants ep 
+                LEFT JOIN events_participants ep 
                 ON e.id = ep.event_id
+                LEFT JOIN participants p            
+                ON p.id = ep.participant_id 
             `;
                   
             const conditions = [];
               
             if (filters.id) conditions.push(`ep.participant_id = ${filters.id}`);
-            if (filters.day) conditions.push(`day(e.start_date) = ${filters.day}`);
-            if (filters.month) conditions.push(`month(e.start_date) = ${filters.month}`);
-            if (filters.year) conditions.push(`year(e.start_date) = ${filters.year}`);
+            if (filters.start_day) conditions.push(`day(e.start_date) = ${filters.start_day}`);
+            if (filters.start_month) conditions.push(`month(e.start_date) = ${filters.start_month}`);
+            if (filters.start_year) conditions.push(`year(e.start_date) = ${filters.start_year}`);
             
             if (conditions.length > 0) {
-                query += " WHERE " + conditions.join(" AND ");
+                query += " WHERE " + conditions.join(" AND ") + " GROUP BY e.id" ;
+            }
+
+            //Filter between two dates
+
+            if(filters.start_day && filters.start_month && filters.start_year && filters.finish_year && filters.finish_month && filters.finish_year){
+
+                query = `
+                SELECT e.title, e.subject, e.description , e.start_date, e.finish_date
+                FROM events e
+                LEFT JOIN events_participants ep
+                ON e.id = ep.event_id                    
+            `
+
+                const start_date = (`'${filters.start_year}-${filters.start_month}-${filters.start_day}'`)
+                const finish_date = (`'${filters.finish_year}-${filters.finish_month}-${filters.finish_day}'`)
+
+                const conditions = [];
+
+                conditions.push(`start_date BETWEEN (${start_date}) AND (${finish_date})`)
+                if (filters.id) conditions.push(`ep.participant_id = ${filters.id}`);
+
+                if (conditions.length > 0) {
+                    query += " WHERE " + conditions.join(" AND ") + " GROUP BY e.id" ;
+                }
             }
                   
             const [rows] = await database.query(query);
