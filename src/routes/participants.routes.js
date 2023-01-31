@@ -1,11 +1,14 @@
 import {Router} from 'express'
-import {index, show, createParticipant} from '../controllers/participants.controller.js'
+import ParticipantController from '../controllers/participants.controller.js'
+import ParticipantModel from '../models/participants.model.js'
 
+const participantModel = new ParticipantModel();
+const participantController = new ParticipantController(participantModel);
 
 const router = Router()
 
-router.get('/participants', index )
-router.get('/participants/:id', show )
-router.post('/participants', createParticipant )
+router.get('/participants', participantController.index() )
+router.get('/participants/:id', participantController.show )
+router.post('/participants', participantController.create )
 
 export default router
