@@ -26,12 +26,12 @@ This repository contains a basic calendar API with events and participants. Made
 
 4. Verify the deployment by navigating 
 
-        <http://127.0.0.1:7000/>
+        http://127.0.0.1:7000/
 
 
 5. Create database connection
 
-        /src/database/connection.js
+        Data connection file : /src/database/connection.js
     
 
 6. Test database connection
@@ -39,8 +39,8 @@ This repository contains a basic calendar API with events and participants. Made
         npm run database
 
 
-> #### Optionals files
->
+### Optionals files
+
 > - Sql file : /calendar_node.sql
-> - /calendars_node.postman_collection.json
+> - Postman Collection: /calendars_node.postman_collection.json
 
