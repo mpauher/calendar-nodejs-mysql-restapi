@@ -1,19 +1,13 @@
 # Overview 
 
----
-
 This repository contains a basic calendar API with events and participants. Made with nodejs (express), and mysql database connection using MVC.
 
 # Requirements
-
----
 
 - node 19.5
 - mysql 8.0
 
 # How to Install
-
----
 
 1. Clone the repository
 
@@ -39,7 +33,6 @@ This repository contains a basic calendar API with events and participants. Made
 6. Test database connection
 
         `npm run database`
---- 
 
 > #### Optionals files
 >
