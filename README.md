@@ -12,7 +12,7 @@ This repository contains a basic calendar API with events and participants. Made
 1. Clone the repository
 
         git clone https://github.com/mpauher/calendar-nodejs-mysql-restapi.git
-        
+
 
 2. Install npm packages
 
@@ -26,12 +26,12 @@ This repository contains a basic calendar API with events and participants. Made
 
 4. Verify the deployment by navigating 
 
-    ><http://127.0.0.1:7000/>
+        <http://127.0.0.1:7000/>
 
 
 5. Create database connection
 
-    >/src/database/connection.js
+        /src/database/connection.js
     
 
 6. Test database connection
