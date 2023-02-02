@@ -7,7 +7,7 @@ const eventController = new EventController(event);
 
 const router = Router()
 
-router.get('/events', eventController.index() )
+router.get('/events', eventController.index )
 router.get('/events/:id', eventController.show )
 router.post('/events', eventController.create)
 

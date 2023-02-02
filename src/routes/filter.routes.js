@@ -13,8 +13,7 @@ const participantController = new ParticipantController(participantModel);
 
 const router = Router()
 
-router.get('/filter/events', eventController.filter())
+router.get('/filter/events', eventController.filter)
 router.get('/filter/participants/:id', participantController.filter)
-
 
 export default router

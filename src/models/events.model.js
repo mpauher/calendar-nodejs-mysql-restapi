@@ -12,7 +12,7 @@ class EventModel{
         this.description = description;
     }
 
-    async findAll(){
+    findAll = async() =>{
         try {
             const [rows] = await this.database.query('SELECT * FROM events')
             return rows;
@@ -22,7 +22,7 @@ class EventModel{
         }
     }
 
-    async findOne(id){
+    findOne = async(id) =>{
         try {
             const [rows] = await this.database.query(`SELECT * FROM events where id = ${id}`)
 
@@ -55,7 +55,6 @@ class EventModel{
         try {
 
             //Filter especific date
-
             let query = `
                 SELECT e.title, e.subject, e.description , e.start_date
                 FROM events e 
@@ -77,7 +76,6 @@ class EventModel{
             }
 
             //Filter between two dates
-
             if(filters.start_day && filters.start_month && filters.start_year && filters.finish_year && filters.finish_month && filters.finish_year){
 
                 query = `

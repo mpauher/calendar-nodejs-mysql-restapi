@@ -6,20 +6,18 @@ class ParticipantController {
         this.participantModel = participantModel;
     }
 
-    index(){
-        return async (req,res) =>{
-            try {
-                const response = await this.participantModel.findAll();
-                res.send(response);
-            } catch (error) {
-                res.status(500).json({
-                    message: error.message
-                });
-            }
+    index = async(req,res) =>{
+        try {
+            const response = await this.participantModel.findAll();
+            res.send(response);
+        } catch (error) {
+            res.status(500).json({
+                message: error.message
+            });
         }
     }
     
-    show = async (req, res) => {
+    show = async(req, res) => {
         try {
             const id = req.params.id;
             const participant = await this.participantModel.findOne(id);
@@ -31,7 +29,7 @@ class ParticipantController {
         }
     }
 
-    create = async (req, res) => {
+    create = async(req, res) => {
         try {
             const { name, lastname, email } = req.body;
             const response = await this.participantModel.create(name, lastname, email);
@@ -43,7 +41,7 @@ class ParticipantController {
         }
     }
 
-    filter = async (req,res) => {
+    filter = async(req,res) => {
         try {
             const id = req.params.id;
             const participants = await this.participantModel.filterParticipants(id);
@@ -57,10 +55,9 @@ class ParticipantController {
 
     }
 
-    join = async (req,res) => {
+    join = async(req,res) => {
         try {
             const { participant_id, event_id } = req.body;
-            console.log(participant_id)
             const response = await this.participantModel.joinEvent(participant_id, event_id);
             res.send(response);
         } catch (error) {
@@ -68,9 +65,7 @@ class ParticipantController {
               message: error.message
             });
         }
-    }
-
-    
+    }    
 }
 
 export default ParticipantController;
